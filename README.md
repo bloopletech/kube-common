@@ -1,3 +1,11 @@
+## Prerequisites
+
+1. Install doctl: https://github.com/digitalocean/doctl#downloading-a-release-from-github
+2. Login to your account with `doctl auth init`.
+3. Install kubectl: https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-using-native-package-management.
+4. Configure kubectl to access your cluster with `doctl kubernetes cluster kubeconfig save <cluster name>`.
+5. Configure docker to be able to access your DigitalOcean container registry with `doctl registry login`.
+
 ## Monitoring
 
 ### metrics-server
@@ -47,14 +55,16 @@ So manual install is not needed.
 
 ## ingress-nginx
 
+Per: https://kubernetes.github.io/ingress-nginx/deploy/#digital-ocean
+
 ````
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/f1f90ef4954effb122412d9cd2d48e02063038a4/deploy/static/mandatory.yaml
-kubectl apply -f nginx-ingress-cloud-generic.yaml
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.34.1/deploy/static/provider/do/deploy.yaml
 ````
 
 ## cert-manager
 
+Per: https://cert-manager.io/docs/installation/kubernetes/#installing-with-regular-manifests
+
 ````
-kubectl create namespace cert-manager
-kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.14.0/cert-manager.yaml
+kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v0.15.1/cert-manager.yaml
 ````
